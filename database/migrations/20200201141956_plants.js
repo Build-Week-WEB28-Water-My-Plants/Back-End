@@ -27,8 +27,10 @@ exports.up = function(knex) {
       .notNullable()
       .index()
     plants
-      .string('species', 255)
+      .integer('species')
       .notNullable()
+      .references('id')
+      .inTable('species')
       .index()
     plants
       .integer('h2o_frequency')
@@ -44,10 +46,26 @@ exports.up = function(knex) {
       .references('id')
       .inTable('users')
   })
+
+  .createTable('species', species => {
+    species
+      .increments()
+    species
+      .string('common_name', 255)
+      .notNullable()
+      .unique()
+      .filter()
+    species
+      .string('scientific_name', 255)
+      .notNullable()
+      .unique()
+      .filter()
+  })
 }
 
 exports.down = function(knex, Promise) {
   return knex.schema
+    .dropTableIfExists('species')
     .dropTableIfExists('plants')
     .dropTableIfExists('users')
 }
