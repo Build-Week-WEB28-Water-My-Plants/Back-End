@@ -18,6 +18,27 @@ exports.up = function(knex) {
       .unique()
       .index()
   })
+  
+  .createTable('species', species => {
+    species
+      .increments()
+    species
+      .string('common_name', 255)
+      .notNullable()
+      .unique()
+      .index()
+    species
+      .string('scientific_name', 255)
+      .notNullable()
+      .unique()
+      .index()
+    species
+      .integer('h2o_frequency')
+      .notNullable()
+      .unsigned()
+    species
+      .string('image_url')
+  })
 
   .createTable('plants', plants => {
     plants
@@ -41,31 +62,11 @@ exports.up = function(knex) {
       .inTable('users')
   })
 
-  .createTable('species', species => {
-    species
-      .increments()
-    species
-      .string('common_name', 255)
-      .notNullable()
-      .unique()
-      .index()
-    species
-      .string('scientific_name', 255)
-      .notNullable()
-      .unique()
-      .index()
-    species
-      .integer('h2o_frequency')
-      .notNullable()
-      .unsigned()
-    species
-      .string('image_url')
-  })
 }
 
 exports.down = function(knex, Promise) {
   return knex.schema
-    .dropTableIfExists('species')
     .dropTableIfExists('plants')
+    .dropTableIfExists('species')
     .dropTableIfExists('users')
 }
