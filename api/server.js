@@ -16,4 +16,8 @@ server.use(logger)
 server.use('/api/users', usersRouter)
 server.use('/api/plants', plantsRouter)
 
+server.get('/', (req, res) => {
+    res.status(200).json({ message: 'server up and running' })
+})
+
 module.exports = server

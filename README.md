@@ -1,11 +1,19 @@
-# Back-End
+# Water My Plants
+
+## API Docs
 
 ## to-do
 
 * fix plants model
 * fix plants router
-* documentation
+* finish documentation
 
 ---
 
-##
+# Documentation
+
+### 
+
+## User Actions
+
+### POST - Register a User
