@@ -6,7 +6,7 @@ const validateSpeciesId = require('../middleware/validateSpeciesId')
 const validatePlantId = require('../middleware/validatePlantId')
 
 // get plants by user_id
-router.get('/user/:id/plants', auth, validateUserId, (req, res) => {
+router.get('/user/:id', auth, validateUserId, (req, res) => {
   const id = req.params.id
   Plants.findByUser(id)
   .then(plants => {
@@ -38,6 +38,18 @@ router.post('/', auth, (req, res) => {
     })
     .catch(err => {
       res.status(500).json({ err: 'error creating plant' })
+    })
+})
+
+// create species
+router.post('/species', (req, res) => {
+  const newSpecies = res.body
+  Plants.addSpecies(newSpecies)
+    .then(species => {
+      res.status(201).json(species)
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error creating species' })
     })
 })
 
