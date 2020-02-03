@@ -33,12 +33,6 @@ exports.up = function(knex) {
       .inTable('species')
       .index()
     plants
-      .integer('h2o_frequency')
-      .notNullable()
-      .unsigned()
-    plants
-      .string('image_url')
-    plants
       .string('location', 255)
     plants
       .integer('user_id')
@@ -60,6 +54,12 @@ exports.up = function(knex) {
       .notNullable()
       .unique()
       .filter()
+    species
+      .integer('h2o_frequency')
+      .notNullable()
+      .unsigned()
+    species
+      .string('image_url')
   })
 }
 

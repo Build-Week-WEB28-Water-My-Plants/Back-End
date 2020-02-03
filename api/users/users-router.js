@@ -1,20 +1,13 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const router = require('express').Router()
+const validateUserId = require('../middleware/validateUserId')
 
 const { jwtSecret } = require('../config/secrets')
 
 const Users = require('../users/users-model')
 
-router.get('/', (req, res) => {
-  Users.find()
-    .then(users => {
-      res.status(200).json(users);
-    })
-    .catch(err => res.send(err));
-});
-
-router.get('/:id', (req, res) => {
+router.get('/:id', validateUserId, (req, res) => {
   Users.findById(id)
     .then(user => {
       res.status(200).json(user)
@@ -56,7 +49,7 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateUserId, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
@@ -76,7 +69,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateId, (req, res) => {
   const { id } = req.params;
 
   Users.remove(id)
@@ -95,7 +88,8 @@ router.delete('/:id', (req, res) => {
 const signToken = user => {
   const payload = {
     sub: 'logged in token',
-    type: 'user',
+    id: user.id,
+    username: user.username
   }
 
   const options = {

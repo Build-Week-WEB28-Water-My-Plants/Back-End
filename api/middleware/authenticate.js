@@ -11,14 +11,14 @@ module.exports = (req, res, next) => {
         res.status(401).json({ err: 'invalid token' })
       } else {
         req.user = { 
-          name: decodedToken.username,
-          type: decodedToken.type
+          id: decodedToken.id,
+          username: decodedToken.username
         };
 
         next();
       }
     })
   } else {
-    res.status(401).json({ err: 'missing token' })
+    res.status(401).json({ err: 'you must be logged in to use this feature' })
   }
 };
