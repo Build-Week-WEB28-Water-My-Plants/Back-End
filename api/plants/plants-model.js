@@ -5,6 +5,7 @@ module.exports = {
   findByUser,
   findBySpecies,
   add,
+  addSpecies,
   remove,
   update
 }
@@ -33,6 +34,14 @@ function add(plant) {
     .insert(plant)
     .then(([user_id]) => {
       return findByUser(user_id)
+    })
+}
+
+function addSpecies(species) {
+  return db('species')
+    .insert(species)
+    .then(species => {
+      return species
     })
 }
 

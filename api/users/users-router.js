@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const router = require('express').Router()
 const validateUserId = require('../middleware/validateUserId')
-
+const auth = require('../middleware/authenticate')
 const { jwtSecret } = require('../config/secrets')
 
 const Users = require('../users/users-model')
@@ -52,7 +52,7 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.put('/:id', validateUserId, (req, res) => {
+router.put('/:id', auth, validateUserId, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
@@ -72,8 +72,8 @@ router.put('/:id', validateUserId, (req, res) => {
   });
 });
 
-router.delete('/:id', validateUserId, (req, res) => {
-  const { id } = req.params;
+router.delete('/:id', auth, validateUserId, (req, res) => {
+  const id = req.params.id;
 
   Users.remove(id)
   .then(deleted => {
