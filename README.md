@@ -196,7 +196,7 @@ No required fields for updating a plant.
 data schema:
 ```json
 {
-  "id": 1, // this will auto update!
+  "id": 1,
   "nickname" : "Steve II",
   "species_id": 1,
   "location": "bedroom",
@@ -218,7 +218,7 @@ There are no required fields for updating a species.
 data schema:
 ```json
 {
-  "id": 1, // this will auto update! 
+  "id": 1,
   "common_name": "updated ficus",
   "scientific_name": "updated ficus benjamina",
   "h2o_frequency": 0.5,
