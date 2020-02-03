@@ -3,17 +3,26 @@ const bcrypt = require('bcryptjs')
 const router = require('express').Router()
 
 const { jwtSecret } = require('../config/secrets')
-const authenticate = require('../middleware/authenticate')
 
 const Users = require('../users/users-model')
 
-router.get('/', authenticate, (req, res) => {
+router.get('/', (req, res) => {
   Users.find()
     .then(users => {
-      res.json(users);
+      res.status(200).json(users);
     })
     .catch(err => res.send(err));
 });
+
+router.get('/:id', (req, res) => {
+  Users.findById(id)
+    .then(user => {
+      res.status(200).json(user)
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'there was an error getting user'})
+    })
+})
 
 router.post('/register', (req, res) => {
   let user = req.body
@@ -45,6 +54,42 @@ router.post('/login', (req, res) => {
     .catch(err => {
       res.status(500).json({ err: 'error in server' })
     })
+});
+
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Users.findById(id)
+  .then(user => {
+    if (user) {
+      Users.update(changes, id)
+      .then(updateduser => {
+        res.json(updateduser);
+      });
+    } else {
+      res.status(404).json({ message: 'Could not find user with given id' });
+    }
+  })
+  .catch (err => {
+    res.status(500).json({ message: 'Failed to update user' });
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  Users.remove(id)
+  .then(deleted => {
+    if (deleted) {
+      res.json({ removed: deleted });
+    } else {
+      res.status(404).json({ message: 'Could not find user with given id' });
+    }
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Failed to delete user' });
+  });
 });
 
 const signToken = user => {

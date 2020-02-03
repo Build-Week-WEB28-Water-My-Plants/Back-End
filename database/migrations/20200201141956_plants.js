@@ -27,7 +27,7 @@ exports.up = function(knex) {
       .notNullable()
       .index()
     plants
-      .integer('species')
+      .integer('species_id')
       .notNullable()
       .references('id')
       .inTable('species')
