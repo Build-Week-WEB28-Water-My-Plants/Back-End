@@ -42,8 +42,9 @@ router.post('/login', (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
+        const { id } = user
         const token = signToken(user)
-        res.status(200).json({ token })
+        res.status(200).json({ token, id })
       } else {
         res.status(401).json({ message: 'invalid credentials' })
       }
@@ -79,7 +80,7 @@ router.delete('/:id', auth, validateUserId, (req, res) => {
   Users.remove(id)
   .then(deleted => {
     if (deleted) {
-      res.json({ removed: deleted });
+      res.json({ removed: `user with id ${id}` });
     } else {
       res.status(404).json({ message: 'Could not find user with given id' });
     }
