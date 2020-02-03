@@ -2,10 +2,10 @@
 
 ## to-do
 
-* plants model
-* plants router
-* plants seed
-* species seed
+* fix plants model
+* fix plants router
 * documentation
 
 ---
+
+##
