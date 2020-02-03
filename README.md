@@ -50,7 +50,7 @@ species:
 ## User Actions
 ---
 ### POST - Register a User 
-`/users`
+`/users/register`
 
 Required fields for registering a user:
 
@@ -72,7 +72,7 @@ Returns registered user's info, with password hashed.
 ---
 
 ### POST - Login a User
-`/users`
+`/users/login`
 
 Required fields for logging in a user:
 
