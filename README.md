@@ -7,6 +7,7 @@
 user:
 ```json
 {
+  "id": 1,
   "username": "user",
   "password": "password",
   "phone_number": "(123)456-7890"
