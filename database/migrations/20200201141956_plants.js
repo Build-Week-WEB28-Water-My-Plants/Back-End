@@ -48,12 +48,12 @@ exports.up = function(knex) {
       .string('common_name', 255)
       .notNullable()
       .unique()
-      .filter()
+      .index()
     species
       .string('scientific_name', 255)
       .notNullable()
       .unique()
-      .filter()
+      .index()
     species
       .integer('h2o_frequency')
       .notNullable()

@@ -8,11 +8,13 @@ const { jwtSecret } = require('../config/secrets')
 const Users = require('../users/users-model')
 
 router.get('/:id', validateUserId, (req, res) => {
+  const id = req.params.id
   Users.findById(id)
     .then(user => {
       res.status(200).json(user)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ message: 'there was an error getting user'})
     })
 })
@@ -27,6 +29,7 @@ router.post('/register', (req, res) => {
       res.status(201).json({ id: saved.id, username: saved.username})
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error in server' })
     })
 });
@@ -69,7 +72,7 @@ router.put('/:id', validateUserId, (req, res) => {
   });
 });
 
-router.delete('/:id', validateId, (req, res) => {
+router.delete('/:id', validateUserId, (req, res) => {
   const { id } = req.params;
 
   Users.remove(id)

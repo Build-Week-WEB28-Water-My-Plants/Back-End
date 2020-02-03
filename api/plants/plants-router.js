@@ -6,7 +6,7 @@ const validateSpeciesId = require('../middleware/validateSpeciesId')
 const validatePlantId = require('../middleware/validatePlantId')
 
 // get plants by user_id
-router.get('/user/:id', auth, validateUserId, (req, res) => {
+router.get('/user/plants/:id', auth, validateUserId, (req, res) => {
   const id = req.params.id
   Plants.findByUser(id)
   .then(plants => {
@@ -30,7 +30,7 @@ router.get('/species/:id', auth, validateSpeciesId, (req, res) => {
 })
 
 // create plant
-router.post('/plants', auth, (req, res) => {
+router.post('/', auth, (req, res) => {
   const newPlant = req.body
   Plants.add(newPlant)
     .then(plant => {
@@ -65,3 +65,5 @@ router.delete('/plants/:id', auth, validatePlantId, (req, res) => {
       res.status(500).json({ err: `problem deleting plant` })
     })
 })
+
+module.exports = router
