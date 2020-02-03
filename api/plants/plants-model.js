@@ -7,7 +7,9 @@ module.exports = {
   add,
   addSpecies,
   remove,
-  update
+  removeSpecies,
+  update,
+  updateSpecies
 }
 
 function findById(id) {
@@ -54,8 +56,23 @@ function update(changes, id) {
     })
 }
 
+function updateSpecies(changes, id) {
+  return db('species')
+    .where('id', id)
+    .update(changes)
+    .then(() => {
+      return findBySpecies(id)
+    })
+}
+
 function remove(id) {
   return db('plants')
     .where('id', id)
+    .del()
+}
+
+function removeSpecies(species_id) {
+  return db('species')
+    .where('species_id', species_id)
     .del()
 }
