@@ -6,7 +6,7 @@ const validateSpeciesId = require('../middleware/validateSpeciesId')
 const validatePlantId = require('../middleware/validatePlantId')
 
 // get plants by user_id
-router.get('/user/plants/:id', auth, validateUserId, (req, res) => {
+router.get('/user/:id/plants', auth, validateUserId, (req, res) => {
   const id = req.params.id
   Plants.findByUser(id)
   .then(plants => {
