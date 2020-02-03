@@ -20,4 +20,8 @@ server.get('/', (req, res) => {
     res.status(200).json({ message: 'server up and running' })
 })
 
+server.get('/api', (req, res) => {
+  res.status(200).json({ message: 'server up and running' })
+})
+
 module.exports = server
