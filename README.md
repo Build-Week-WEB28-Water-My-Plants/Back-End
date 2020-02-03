@@ -1,16 +1,4 @@
-# Water My Plants
-
-## API Docs
-
-## to-do
-
-* fix plants model
-* fix plants router
-* finish documentation
-
----
-
-# Documentation
+# Water My Plants API Documentation
 
 ### base url: https://water-my-plants-1.herokuapp.com/api
 
