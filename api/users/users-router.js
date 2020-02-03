@@ -73,7 +73,7 @@ router.put('/:id', validateUserId, (req, res) => {
 });
 
 router.delete('/:id', validateUserId, (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
 
   Users.remove(id)
   .then(deleted => {
