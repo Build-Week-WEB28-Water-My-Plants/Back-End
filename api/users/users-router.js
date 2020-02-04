@@ -7,6 +7,7 @@ const { jwtSecret } = require('../config/secrets')
 
 const Users = require('../users/users-model')
 
+// gets user by id
 router.get('/:id', validateUserId, (req, res) => {
   const id = req.params.id
   Users.findById(id)
@@ -19,6 +20,7 @@ router.get('/:id', validateUserId, (req, res) => {
     })
 })
 
+// registers new user
 router.post('/register', (req, res) => {
   console.log(req.body)
   let user = req.body
@@ -27,7 +29,7 @@ router.post('/register', (req, res) => {
   console.log(user)
   Users.add(user)
     .then(saved => {
-      res.status(201).json({ id: saved.id, username: saved.username})
+      res.status(201).json({ id: saved.id, username: saved.username })
     })
     .catch(err => {
       console.log(err)
@@ -35,6 +37,7 @@ router.post('/register', (req, res) => {
     })
 });
 
+// logs in user
 router.post('/login', (req, res) => {
   let { username, password } = req.body
 
@@ -54,10 +57,16 @@ router.post('/login', (req, res) => {
     })
 });
 
+// updates user
 router.put('/:id', auth, validateUserId, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
-
+  if (req.body.password) {
+    const hash = bcrypt.hashSync(changes.password, 10)
+    changes.password = hash
+  } else {
+    null
+  }
   Users.findById(id)
   .then(user => {
     if (user) {
@@ -74,6 +83,7 @@ router.put('/:id', auth, validateUserId, (req, res) => {
   });
 });
 
+// deletes user
 router.delete('/:id', auth, validateUserId, (req, res) => {
   const id = req.params.id;
 
@@ -90,6 +100,7 @@ router.delete('/:id', auth, validateUserId, (req, res) => {
   });
 });
 
+// creates token
 const signToken = user => {
   const payload = {
     sub: 'logged in token',
