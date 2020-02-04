@@ -22,7 +22,7 @@ exports.seed = function(knex) {
           username: 'user3', 
           password: 'password', 
           phone_number: '(800)123-4567'
-        }
+        },
       ]);
     });
 };

@@ -53,6 +53,7 @@ router.post('/login', (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error in server' })
     })
 });
@@ -79,6 +80,7 @@ router.put('/:id', auth, validateUserId, (req, res) => {
     }
   })
   .catch (err => {
+    console.log(err)
     res.status(500).json({ message: 'Failed to update user' });
   });
 });
@@ -96,6 +98,7 @@ router.delete('/:id', auth, validateUserId, (req, res) => {
     }
   })
   .catch(err => {
+    console.log(err)
     res.status(500).json({ message: 'Failed to delete user' });
   });
 });

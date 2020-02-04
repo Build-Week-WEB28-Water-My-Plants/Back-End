@@ -13,6 +13,7 @@ router.get('/user/:id', auth, validateUserId, (req, res) => {
         res.status(200).json(plants)
       })
       .catch(err => {
+        console.log(err)
         res.status(500).json({ err: 'error getting plants' })
       })
 })
@@ -25,6 +26,7 @@ router.get('/species/:id', auth, validateSpeciesId, (req, res) => {
       res.status(200).json(plants)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error getting plants' })
     })
 })
@@ -37,6 +39,7 @@ router.get('/species', auth, (req, res) => {
       res.status(200).json(species)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error getting species' })
     })
 })
@@ -49,6 +52,7 @@ router.get('/species/list/:id', auth, validateSpeciesId, (req, res) => {
       res.status(200).json(species)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error getting species' })
     })
 })
@@ -69,6 +73,7 @@ router.post('/', auth, (req, res) => {
           })
       })
       .catch(err => {
+        console.log(err)
         res.status(500).json({ err: 'error creating plant' })
       })
     }
@@ -96,6 +101,7 @@ router.put('/:id', auth, validatePlantId, (req, res) => {
       res.status(200).json(plant)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error updating plant' })
     })
 })
@@ -109,6 +115,7 @@ router.put('/species/:id', auth, validateSpeciesId, (req, res) => {
       res.status(200).json(species)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error updating species' })
     })
 })
@@ -121,6 +128,7 @@ router.delete('/:id', auth, validatePlantId, (req, res) => {
       res.status(200).json({ message: `plant with id ${id} deleted` })
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: `problem deleting plant` })
     })
 })
@@ -133,6 +141,7 @@ router.delete('/species/:id', auth, validateSpeciesId, (req, res) => {
       res.status(200).json({ message: `species with id ${id} deleted` })
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: `problem deleting species` })
     })
 })
