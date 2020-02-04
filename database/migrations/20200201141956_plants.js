@@ -38,6 +38,8 @@ exports.up = function(knex) {
       .unsigned()
     species
       .string('image_url')
+    species
+      .text('image_binary')
   })
 
   .createTable('plants', plants => {
