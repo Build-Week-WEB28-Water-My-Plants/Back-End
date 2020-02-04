@@ -4,6 +4,8 @@ module.exports = {
   findById,
   findByUser,
   findBySpecies,
+  findAllSpecies,
+  findSpeciesID,
   add,
   addSpecies,
   remove,
@@ -31,6 +33,16 @@ function findBySpecies(species_id) {
     .where('species_id', species_id)
 }
 
+function findAllSpecies() {
+  return db('species')
+}
+
+function findSpeciesID(id) {
+  return db('species')
+    .where('id', id)
+    .select('*')
+}
+
 function add(plant) {
   return db('plants')
     .insert(plant)
@@ -42,8 +54,8 @@ function add(plant) {
 function addSpecies(species) {
   return db('species')
     .insert(species)
-    .then(species => {
-      return species
+    .then(([id]) => {
+      return findSpeciesID(id)
     })
 }
 

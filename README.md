@@ -113,7 +113,7 @@ Returns deleted user's ID.
 
 ---
 
-### GET - Get Plants by User ID
+### GET - Get a list of Plants by User ID
 `/plants/user/:id`
 
 Requires a valid token for access.
@@ -122,12 +122,30 @@ Returns all plants with given user_id
 
 ---
 
-### GET - Get Plants by Species ID
+### GET - Get a list of Plants by Species ID
 `/plants/species/:id`
 
 Requires a valid token for access.
 
 Returns all plants with given species_id
+
+---
+
+### GET - Get a list of all Species
+`/plants/species`
+
+Requires a valid token for access.
+
+Returns all species in database
+
+---
+
+### GET - Get a list of Species by Species ID
+`/plants/species/list/:id`
+
+Requires a valid token for access.
+
+Returns a species by its species_id
 
 ---
 
@@ -180,7 +198,7 @@ data schema:
 }
 ```
 
-Returns species_id of new species.
+Returns created species.
 
 ---
 

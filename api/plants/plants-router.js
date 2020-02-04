@@ -19,13 +19,37 @@ router.get('/user/:id', auth, validateUserId, (req, res) => {
 
 // get plants by species_id
 router.get('/species/:id', auth, validateSpeciesId, (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
   Plants.findBySpecies(id)
     .then(plants => {
       res.status(200).json(plants)
     })
     .catch(err => {
       res.status(500).json({ err: 'error getting plants' })
+    })
+})
+
+// get list of species
+router.get('/species', auth, (req, res) => {
+  Plants.findAllSpecies()
+    .then(species => {
+      // console.log(species)
+      res.status(200).json(species)
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error getting species' })
+    })
+})
+
+// find species by id
+router.get('/species/list/:id', auth, validateSpeciesId, (req, res) => {
+  const id = req.params.id
+  Plants.findSpeciesID(id)
+    .then(species => {
+      res.status(200).json(species)
+    })
+    .catch(err => {
+      res.status(500).json({ err: 'error getting species' })
     })
 })
 
@@ -55,9 +79,10 @@ router.post('/species', auth, (req, res) => {
   const newSpecies = req.body
   Plants.addSpecies(newSpecies)
     .then(species => {
-      res.status(201).json({ species_id: species })
+      res.status(200).json(species)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ err: 'error creating species' })
     })
 })
@@ -100,6 +125,7 @@ router.delete('/:id', auth, validatePlantId, (req, res) => {
     })
 })
 
+// delete species
 router.delete('/species/:id', auth, validateSpeciesId, (req, res) => {
   const id = req.params.id
   Plants.removeSpecies(id)
