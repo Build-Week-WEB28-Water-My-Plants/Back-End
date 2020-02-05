@@ -65,7 +65,7 @@ router.post('/', auth, (req, res) => {
   if (!species_id) {
     res.status(404).json({ err: 'species not in our database yet, please create species first' })
   } else {
-    newPlant.created_at = Date(Date.now()).toString()
+    newPlant.created = Date(Date.now()).toString()
     Plants.add(newPlant)
       .then(addedPlant => {
         Plants.findById(addedPlant)
