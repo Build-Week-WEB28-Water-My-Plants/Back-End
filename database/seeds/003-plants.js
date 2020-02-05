@@ -11,7 +11,7 @@ exports.seed = function(knex) {
           species_id: 1,
           location: 'living room',
           user_id: 1,
-          created_at: Date(Date.now()).toString()
+          created: Date(Date.now()).toString()
         },
         {
           id: 2,
@@ -19,7 +19,7 @@ exports.seed = function(knex) {
           species_id: 2,
           location: 'bedroom',
           user_id: 1,
-          created_at: Date(Date.now()).toString()
+          created: Date(Date.now()).toString()
         },
         {
           id: 3,
@@ -27,7 +27,7 @@ exports.seed = function(knex) {
           species_id: 3,
           location: 'kitchen',
           user_id: 2,
-          created_at: Date(Date.now()).toString()
+          created: Date(Date.now()).toString()
         },
         {
           id: 4,
@@ -35,7 +35,7 @@ exports.seed = function(knex) {
           species_id: 3,
           location: 'living room',
           user_id: 3,
-          created_at: Date(Date.now())
+          created: Date(Date.now())
         },
       ]);
     });
