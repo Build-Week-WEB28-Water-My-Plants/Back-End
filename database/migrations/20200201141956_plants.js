@@ -13,7 +13,7 @@ exports.up = function(knex) {
       .string('password', 255)
       .notNullable()
     users
-      .string('phone_number', 255)
+      .string('phone_number', 10)
       .notNullable()
       .unique()
       .index()
@@ -22,6 +22,7 @@ exports.up = function(knex) {
   .createTable('species', species => {
     species
       .increments()
+      .unique()
     species
       .string('common_name', 255)
       .notNullable()
@@ -54,14 +55,16 @@ exports.up = function(knex) {
       .notNullable()
       .references('id')
       .inTable('species')
-      .index()
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE')
     plants
       .string('location', 255)
     plants
       .integer('user_id')
-      .unsigned()
       .references('id')
       .inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE')
     plants
       .string('created')
   })

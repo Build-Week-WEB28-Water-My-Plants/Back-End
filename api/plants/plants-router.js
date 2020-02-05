@@ -60,31 +60,18 @@ router.get('/species/list/:id', auth, validateSpeciesId, (req, res) => {
 // create plant
 router.post('/', auth, (req, res) => {
   const newPlant = req.body
-  const species_id = req.body.species_id
-  Plants.findBySpecies(species_id)
-    .then(species => {
-      if (!species) {
-        res.status(404).json({ err: 'species not in our database yet, please create species first' })
-      } else {
-        newPlant.created = Date(Date.now()).toString()
-        Plants.add(newPlant)
-          .then(addedPlant => {
-            Plants.findById(addedPlant)
-              .then(plant => {
-                res.status(201).json(plant)
-              })
-          })
-          .catch(err => {
-            console.log(err)
-            res.status(500).json({ err: 'error creating plant' })
-          })
-        }
+  // newPlant.created = Date(Date.now()).toString()
+  console.log(newPlant)
+  Plants.add(newPlant)
+    .then(plant => {
+      res.status(201).json(plant)
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ err: 'problem in server' })
+      res.status(500).json({ err: 'error creating plant' })
     })
-})
+  }
+)
 
 // create species
 router.post('/species', auth, (req, res) => {

@@ -25,7 +25,7 @@ function findByUser(user_id) {
   return db('plants as p')
     .where('p.user_id', user_id)
     .join('species as s', 'p.species_id', 's.id')
-    .select('*')
+    .select('p.id', 'p.nickname', 's.common_name', 's.scientific_name', 'p.location', 'p.user_id', 'p.created')
 }
 
 function findBySpecies(species_id) {
@@ -46,8 +46,8 @@ function findSpeciesID(id) {
 function add(plant) {
   return db('plants')
     .insert(plant)
-    .then(([user_id]) => {
-      return findByUser(user_id)
+    .then(newPlant => {
+      return newPlant
     })
 }
 
