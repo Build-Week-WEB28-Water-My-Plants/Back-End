@@ -63,7 +63,7 @@ exports.up = function(knex) {
       .references('id')
       .inTable('users')
     plants
-      .string('created_at')
+      .string('created')
   })
 
 }
