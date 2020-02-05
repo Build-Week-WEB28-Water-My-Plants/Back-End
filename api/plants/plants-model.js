@@ -85,6 +85,6 @@ function remove(id) {
 
 function removeSpecies(species_id) {
   return db('species')
-    .where('species_id', species_id)
+    .where('id', species_id)
     .del()
 }
