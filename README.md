@@ -21,7 +21,8 @@ plant:
   "nickname": "Steve",
   "species_id": 1,
   "location": "living room",
-  "user_id": 1
+  "user_id": 1,
+  "created": Date.now()
 }
 ```
 
@@ -159,6 +160,7 @@ Required fields for creating a plant:
 
 - nickname
 - species_id
+- user_id
 
 #### NOTE: as of now, species MUST exist BEFORE creating plant. It will throw an error if the species doesn't exist when you create the plant.
 
