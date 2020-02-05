@@ -86,6 +86,7 @@ Returns token used for authorization on other endpoints, and user ID.
 `/users/:id`
 
 No required fields for updating a user.
+Any fields left blank will not be changed.
 
 data schema:
 ```json
