@@ -132,6 +132,7 @@ router.delete('/species/:id', auth, validateSpeciesId, (req, res) => {
   const id = req.params.id
   Plants.removeSpecies(id)
     .then(deleted => {
+      console.log(deleted)
       res.status(200).json({ message: `species with id ${id} deleted` })
     })
     .catch(err => {

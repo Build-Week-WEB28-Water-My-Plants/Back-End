@@ -53,6 +53,7 @@ exports.up = function(knex) {
     plants
       .integer('species_id')
       .notNullable()
+      .unsigned()
       .references('id')
       .inTable('species')
       .onUpdate('CASCADE')
